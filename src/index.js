@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         player.handleSpriteFrame();
         bubble.draw(c);
         bubble.move();
+        player.fire(c);
         if (checkCollision(bubble, player)){
             c.drawImage(background, 0, 0, canvas.width, canvas.height);
             player.draw(c);

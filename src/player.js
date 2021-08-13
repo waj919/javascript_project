@@ -65,4 +65,14 @@ export default class Player {
             100
         );      
     }
+
+    fire(c){
+        c.strokeStyle = 'blue'
+        c.lineWidth = 5;
+        c.beginPath();
+        c.moveTo(this.x + this.width + 10, this.y)
+        c.lineTo(this.x + this.width + 10, 0)
+        c.stroke();
+        c.closePath();
+    }
 }

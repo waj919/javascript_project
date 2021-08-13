@@ -13,8 +13,10 @@ export default class Bubbles {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false )
         c.fillStyle = 'red';
+        c.strokeStyle = 'red'
         c.fill();
         c.stroke();
+        c.closePath()
     }
 
     move(){
@@ -29,7 +31,7 @@ export default class Bubbles {
         this.y += this.velY;
         this.x += this.velX;
 
-        console.log(this.x, this.y)
+    
     }
 
 
