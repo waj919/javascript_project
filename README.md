@@ -8,10 +8,15 @@
  ## Functionality & MVPs
  In Bubble Trouble, users will be able to: 
   * Move left and right and shoot at bubbles on the screen
-  * Have 5 lives and lose a live for each bubble that hit them
-  * Have a timer to finish the round 
+  * Have 5 lives
+  * Lose a life when they collide with a bubble
+  * Have a timer to end the round.
+     * When timer gets to 0 and there are still bubbles left, you lose a life.
+     * If you destroy all bubbles, you move on to the next round
+  * Experience different levels of difficulties by moving on to next round
+     * Levels will get harder by having larger and more bubbles.
   * Have a current score showing how they are doing
-
+  
 
 In addition, this project will include:
   * Instructions on how to play the game and the rules
@@ -33,11 +38,11 @@ This project will be implemented with the following technologies:
   * Friday Afternoon & Weekend : Start on the basics for my project, get the player and bubbles done. 
   * Monday: Get the score and lives implemented into my game
   * Tuesday: Work on styling and try to make the game better looking
-  * Wednesday: Work on any extra features that i might want to add
+  * Wednesday: Work on any extra features that I might want to add
   * Thursday Morning: Deploy to GitHub pages
 
-## Bonus
+## Bonus Functionalities
 Some features that could be added are:
-* Being able to choose which charactr you want to be
+* Being able to choose which character you want to be
 * Have power ups that give you a better weapon
-*
+
