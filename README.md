@@ -8,9 +8,9 @@
  ## Functionality & MVPs
  In Bubble Trouble, users will be able to: 
   * Move left and right and shoot at bubbles on the screen
-  * Will be able to see how many lives they have left
-  * See how much time they have left 
-  * See their curretn score
+  * Have 5 lives and lose a live for each bubble that hit them
+  * Have a timer to finish the round 
+  * Have a current score showing how they are doing
 
 
 In addition, this project will include:
@@ -30,9 +30,14 @@ This project will be implemented with the following technologies:
   * npm to manage project dependencies
  
 ## Timeline
-  * Friday Afternoon & Weekend : Start on the basics for my project, as well as get the game background running. 
-  * Monday: Get the bubbles and the layout of the game done
-  * Tuesday: Get the player movements working and the collsion of bubbles and characters
-  * Wednesday: Work on the style and design of the game 
+  * Friday Afternoon & Weekend : Start on the basics for my project, get the player and bubbles done. 
+  * Monday: Get the score and lives implemented into my game
+  * Tuesday: Work on styling and try to make the game better looking
+  * Wednesday: Work on any extra features that i might want to add
   * Thursday Morning: Deploy to GitHub pages
 
+## Bonus
+Some features that could be added are:
+* Being able to choose which charactr you want to be
+* Have power ups that give you a better weapon
+*
