@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const player = new Player();
 
     // const bubble = new Bubbles(650, 100, 30, 3, 3);
-    const bubbles = [new Bubbles(650, 100, 50, 1, 1)]
+    const bubbles = [new Bubbles(650, 100, 50, 1.5, 1.5)]
   
     const magazine = [];
     window.addEventListener('keydown', (e) => {
@@ -44,9 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //bubble movement
         bubbles.forEach( (bubble, bubbleIndex) => {
-            bubble.draw(c);
-            bubble.move();
-
+            
             //weapon shooting
             magazine.forEach( (ammo, ammoIndex) => {
                 ammo.draw(c);
@@ -55,14 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     magazine.splice(ammoIndex, 1)
                 }
                 if (ammoCollision(ammo, bubble)){
-                    bubbles.push(new Bubbles(500, 100, 30, 1, 1));
+                    bubbles.push(new Bubbles(Math.random() * canvas.width, 100, 30, 1, 1));
+                    bubbles.push(new Bubbles(Math.random() * canvas.width, 100, 30, 1, 1));
                     // bubbles.push(new Bubbles(bubble.x, bubble.y, 30, 1, 1));
                     magazine.splice(ammoIndex, 1);
                     bubbles.splice(bubbleIndex, 1);
                     console.log(bubbles);
                 }
-
+                
             })
+            bubble.draw(c);
+            bubble.move();
         })
 
         
@@ -104,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
         let diffX =ammo.x - bubble.x;
     
-        let diffY = bubble.y - (bubble.y);
+        let diffY = bubble.y - ammo.y;
     
         let dist = Math.sqrt((diffX ** 2) + (diffY ** 2))
         
-        if (dist < (bubble.radius + ammo.radius) ) return true;
+        if (dist < bubble.radius ) return true;
         else return false;
     
     }

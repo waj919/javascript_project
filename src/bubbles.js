@@ -29,7 +29,7 @@ export default class Bubbles {
             this.velY *= -1; 
         }
         
-        this.velY += .09;
+        this.velY += .1;
         this.y += this.velY;
         this.x += this.velX;
 
