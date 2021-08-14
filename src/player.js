@@ -10,28 +10,30 @@ export default class Player {
         this.speed = 2;
         this.moving = false
         this.keys = [];
-
+        this.weaponX = this.x;
+        this.weaponY = this.y;
+        this.shoot = false
+        
         this.sprite = new Image();
         this.sprite.src = ('./src/images/hulk.png')
-
-        window.addEventListener('keydown', function(e){
+        
+        addEventListener('keydown', function(e){
             this.keys[e.key] = true;
-            // debugger
+            if (this.keys[" "]) this.shoot = true
             
         }.bind(this))
         
-        window.addEventListener('keyup', function(e){
+       addEventListener('keyup', function(e){
             delete this.keys[e.key];
             this.moving = false;
             this.frameY = 3;
             
         }.bind(this))
+        
     }
     
-    move(){
-        // console.log(this.keys['ArrowLeft'])
+    move(){ 
         if (this.keys["ArrowLeft"] && this.x > 105){
-            // debugger
             this.x -= this.speed
             this.frameY = 1
             this.moving = true;
@@ -66,13 +68,27 @@ export default class Player {
         );      
     }
 
-    fire(c){
-        c.strokeStyle = 'blue'
-        c.lineWidth = 5;
-        c.beginPath();
-        c.moveTo(this.x + this.width + 10, this.y)
-        c.lineTo(this.x + this.width + 10, 0)
-        c.stroke();
-        c.closePath();
-    }
+    // fire(c){
+    //     if (this.shoot){
+    //             c.beginPath();   
+    //             // c.moveTo(this.x + this.width + 10, this.y)
+    //             // c.lineTo(this.x + this.width + 10, 0)
+    //             c.arc(this.weaponX + 50, this.weaponY, 5, 0 , Math.PI * 2, true);
+    //             c.fillStyle = 'yellow';
+    //             c.strokeStyle = 'yellow'
+    //             c.fill();
+    //             c.stroke();
+    //             // c.closePath()
+    //         }
+    // }
+
+    // moveAmmo(){
+    //     if (this.weaponY < 0){
+    //         this.shoot = false;
+    //     } else {
+    //         this.weaponY -= 1
+    //     }
+    // }
+
+   
 }

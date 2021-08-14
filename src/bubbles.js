@@ -6,6 +6,7 @@ export default class Bubbles {
         this.radius = radius;
         this.velY = velX;
         this.velX = velY;
+        
 
     }
 
@@ -13,21 +14,22 @@ export default class Bubbles {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false )
         c.fillStyle = 'red';
-        c.strokeStyle = 'red'
+        c.strokeStyle = 'black'
         c.fill();
         c.stroke();
         c.closePath()
     }
 
     move(){
-
-        if (this.x < 137 || this.x > 1125 ){
+        
+        if (this.x - this.radius < 110 || this.x + this.radius > 1160 ){
             this.velX *= -1;
         } 
-        if (this.y  < 0 || this.y >= 475){
+        if (this.y  < 0 || this.y + this.radius >= 500 ){
             this.velY *= -1; 
         }
-        this.velY += .1;
+        
+        this.velY += .09;
         this.y += this.velY;
         this.x += this.velX;
 
