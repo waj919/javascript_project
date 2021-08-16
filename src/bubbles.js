@@ -1,6 +1,7 @@
 
 export default class Bubbles {
     constructor(x, y , radius, velX, velY){
+        // debugger
         this.x = x;
         this.y = y;
         this.radius = radius;
@@ -13,7 +14,7 @@ export default class Bubbles {
     draw(c){
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false )
-        c.fillStyle = 'red';
+        c.fillStyle = 'hsl(203, 18%, 45%)';
         c.strokeStyle = 'black'
         c.fill();
         c.stroke();

@@ -34,12 +34,12 @@ export default class Player {
     }
     
     move(){ 
-        if (this.keys["ArrowLeft"] && this.x > 105){
+        if (this.keys["ArrowLeft"] && this.x > 0){
             this.x -= this.speed
             this.frameY = 1
             this.moving = true;
         }
-        if (this.keys['ArrowRight'] && this.x < 1060){
+        if (this.keys['ArrowRight'] && this.x < 1200){
             this.x += this.speed
             this.frameY = 2
             this.moving = true  ;
