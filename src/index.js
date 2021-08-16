@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //bcakground
     const background = new Image();
     const border = new Image();
-    background.src = "./src/images/wall.jpg"
+    background.src = "./src/images/wall2.jpg"
 
 
     //player, bubbles, and ammo
     const player = new Player();
+    let score = 0;
+    const lives = [1,2,3,4,5]
 
     // const bubble = new Bubbles(650, 100, 30, 3, 3);
     const bubbles = [new Bubbles(650, 100, 50, 1.5, 1.5)]
@@ -37,34 +39,51 @@ document.addEventListener('DOMContentLoaded', () => {
         c.clearRect(0 , 0, canvas.width, canvas.height)
         // c.fillStyle = 'rgba(255, 255, 0, 0.1)';
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        
+        c.font = '50px serif';
+        c.fillText(`${score}`, 1000, 550);
+        
         //player movement
         player.draw(c);
         player.move();
+
+        //animates player
         player.handleSpriteFrame();
 
-        //bubble movement
+        //bubble movement loop
         bubbles.forEach( (bubble, bubbleIndex) => {
             
-            //weapon shooting
+            bubble.draw(c);
+            bubble.move();
+            
+            //loop through array to get each amoo thats shot
             magazine.forEach( (ammo, ammoIndex) => {
+                //draw the ammo
                 ammo.draw(c);
                 ammo.update();
+
+                //check if its reached the top of the canvas and remove it if it has
                 if (ammo.y < 0){
                     magazine.splice(ammoIndex, 1)
                 }
+
+                //check to see if the ammo hit a bubble 
                 if (ammoCollision(ammo, bubble)){
-                    bubbles.push(new Bubbles(Math.random() * canvas.width, 100, 30, 1, 1));
-                    bubbles.push(new Bubbles(Math.random() * canvas.width, 100, 30, 1, 1));
-                    // bubbles.push(new Bubbles(bubble.x, bubble.y, 30, 1, 1));
+                    score += 100;
+                    let num = Math.random() * canvas.width;
+
+                    bubbles.push(new Bubbles(num , 100, (bubble.radius - 15), 1, 1));
+                    // bubbles.push(new Bubbles(Math.random() * canvas.width, 100, 30, 1, 1));
+
+                    // remove the bubble and ammo from arrays
                     magazine.splice(ammoIndex, 1);
                     bubbles.splice(bubbleIndex, 1);
-                    console.log(bubbles);
+
                 }
                 
             })
-            bubble.draw(c);
-            bubble.move();
-        })
+        })  // end bubble loop
 
         
         //collison detection

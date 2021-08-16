@@ -7,5 +7,6 @@
 }
 
 body {
+    background: url(../images/background.jpg);
     background-color: #6dd5ed;
 }
