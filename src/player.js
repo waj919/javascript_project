@@ -69,27 +69,4 @@ export default class Player {
         );      
     }
 
-    // fire(c){
-    //     if (this.shoot){
-    //             c.beginPath();   
-    //             // c.moveTo(this.x + this.width + 10, this.y)
-    //             // c.lineTo(this.x + this.width + 10, 0)
-    //             c.arc(this.weaponX + 50, this.weaponY, 5, 0 , Math.PI * 2, true);
-    //             c.fillStyle = 'yellow';
-    //             c.strokeStyle = 'yellow'
-    //             c.fill();
-    //             c.stroke();
-    //             // c.closePath()
-    //         }
-    // }
-
-    // moveAmmo(){
-    //     if (this.weaponY < 0){
-    //         this.shoot = false;
-    //     } else {
-    //         this.weaponY -= 1
-    //     }
-    // }
-
-   
 }

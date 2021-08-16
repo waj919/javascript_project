@@ -15,6 +15,6 @@ export default class Ammo {
     }
 
     update(){
-        this.y -= 2;
+        this.y -= 3;
     }
 }

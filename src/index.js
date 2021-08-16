@@ -1,6 +1,6 @@
 import Bubbles from "./bubbles";
 import Player from "./player";
-import checkCollision from "./collision"
+import * as Collisions from "./collision";
 import Ammo from "./ammo";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let player = new Player();
     let score = 0;
     const lives = [1,2,3]
+    // let lives = []
+
+    
     let time = 60;
     
     let timerX = 300;
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // for (let i = 0; i < 3; i++) {
     //     lives.push(new Image())
-    //     lives[i].src = './src/images/fire_life.jpg'
+    //     lives[i].src = './src/images/life.png'
     // }
 
   
@@ -54,9 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // c.fillStyle = 'rgba(255, 255, 0, 0.1)';
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-        // c.font = '30px OCR A Std, monospace';
-        // c.fillStyle = 'white'
-        // c.fillText(`Time: ${time}`, 600, 50);
+        
+        //timer for the game
         if ( timerX < 1000){
             c.fillStyle = 'red'
             c.fillRect(timerX, 30, timerWidth, 30)
@@ -74,16 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
         c.fillStyle = 'white'
         c.fillText(`Score: ${score}`, 1035, 50);
 
-      let spacing = 200;
 
-        for (let i = 0; i < 3; i++) {
-            c.font =  '20px OCR A Std, monospace';
+        // for (let i = 0; i < lives.length; i++) {
+            c.font =  '30px OCR A Std, monospace';
             c.fillStyle = 'hsl(45, 95%, 58%)'
-            c.fillText(lives[i], spacing ,50)
-            spacing += 20
-
-            
-        }
+            c.fillText('Lives: ' + lives.length, 150 ,50)
+            // spacing += 20
+        // }
 
 
         //player movement
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 //check to see if the ammo hit a bubble 
-                if (ammoCollision(ammo, bubble)){
+                if (Collisions.ammoCollision(ammo, bubble)){
                     score += 100;
                     if(bubble.radius > 19){
 
@@ -135,55 +134,48 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //collison detection
         bubbles.forEach(bubble => {    
-            if (checkPlayerCollision(bubble, player)){
+            if (Collisions.checkPlayerCollision(bubble, player)){
                 c.drawImage(background, 0, 0, canvas.width, canvas.height);
                 // player.draw(c);
                 // bubble.draw(c);
-                lives.splice(4,1)
-                resetGame();
-                requestAnimationFrame(animate);
-            } else { 
-                if (bubbles.length === 0){
+                lives.splice(lives.length-1 ,1)
+
+
+                if (gameOver()){
+
+                    //draw the game over screen when no more lives left
+
+                    c.drawImage(background, 0, 0, canvas.width, canvas.height);
+                    c.font = '100px impact';
+                    c.fillStyle = 'white';
+
+                    c.fillText('Game Over!', 395, canvas.height / 2)
+                    c.fillStyle = 'red';
+                    c.fillText('Game Over!', 400, canvas.height / 2)
+                    
+                    c.font = '50px impact'
+                    c.fillStyle = 'white'
+                    c.fillText('Score: ' + score, 530, 350 )
+
+
+
+
+                } else if (bubbles.length === 0){
+                    //change to level to game
                     levelTwo();
-                }
+                } else {
+                    resetGame();
+                    requestAnimationFrame(animate);
+                } 
+            }  else {
                 // have an if statement where if level1 is true, you go to a different fucntion
                 requestAnimationFrame(animate);
             }
+            
         })
     }
     
-    
-    
-    const checkPlayerCollision = function(bubble, player){
-        
-        let endX = player.x + player.width;
-        let endY = player.y + player.height;
-        
-        let centerX = (player.x + endX) / 2;
-        let centerY = (player.y +endY) / 2;
-        
-        let diffX =centerX - bubble.x
-        let diffY = centerY - bubble.y
-        
-        let dist = Math.sqrt((diffX ** 2) + (diffY ** 2))
-        
-        if (dist < bubble.radius+40) return true;
-        else return false;
-    }
-    
-    const ammoCollision = function (ammo, bubble){
-        
-        let diffX =ammo.x - bubble.x;
-        
-        let diffY = bubble.y - ammo.y;
-        
-        let dist = Math.sqrt((diffX ** 2) + (diffY ** 2))
-        
-        if (dist < bubble.radius ) return true;
-        else return false;
-        
-    }
-    
+
     function resetGame(){
         player = new Player();
         bubbles = [new Bubbles(650, 100, 50, 1.5, 1.5)]
@@ -200,6 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
         magazine = [];
         player = new Player();
         // 
+    }
+
+    function gameOver(){
+        if (lives.length === 0) return true
+        else return false
     }
    
     animate();
