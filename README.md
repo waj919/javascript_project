@@ -8,7 +8,7 @@
  ## Functionality & MVPs
  In Bubble Trouble, users will be able to: 
   * Move left and right and shoot at bubbles on the screen
-  * Have 5 lives
+  * Have 3 lives
   * Lose a life when they collide with a bubble
   * Have a timer to end the round.
      * When timer gets to 0 and there are still bubbles left, you lose a life.
