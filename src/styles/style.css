@@ -1,5 +1,5 @@
 #canvas {
-    border: 1px solid black;
+   
     position: absolute;
     top: 50%;
     left: 50%;
@@ -10,3 +10,6 @@ body {
     background: url(../images/background.jpg);
     background-color: #6dd5ed;
 }
+
+
+

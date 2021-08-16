@@ -22,23 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     const lives = [1,2,3]
     // let lives = []
-
     
-    let time = 60;
+   
+    gameStart();
+    
     
     let timerX = 300;
     let timerWidth = 700;
-    
 
-    // for (let i = 0; i < 3; i++) {
-    //     lives.push(new Image())
-    //     lives[i].src = './src/images/life.png'
-    // }
-
-  
-
-    // const bubble = new Bubbles(650, 100, 30, 3, 3);
-    // let bubbles = [new Bubbles(650, 100, 50, 1.5, 1.5)]
     
     let bubbles = [new Bubbles(750, 100, 50, 1.5, 1.5)]
 //   , new Bubbles(550, 100, 50, -1.5, -1.5)
@@ -56,8 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         c.clearRect(0 , 0, canvas.width, canvas.height)
         // c.fillStyle = 'rgba(255, 255, 0, 0.1)';
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-        
+     
         //timer for the game
         if ( timerX < 1000){
             c.fillStyle = 'red'
@@ -66,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerWidth -= .3;
         }
 
+       
         
         
         // making score appear
@@ -141,24 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 lives.splice(lives.length-1 ,1)
 
 
-                if (gameOver()){
+                if (lives.length === 0){
 
-                    //draw the game over screen when no more lives left
-
-                    c.drawImage(background, 0, 0, canvas.width, canvas.height);
-                    c.font = '100px impact';
-                    c.fillStyle = 'white';
-
-                    c.fillText('Game Over!', 395, canvas.height / 2)
-                    c.fillStyle = 'red';
-                    c.fillText('Game Over!', 400, canvas.height / 2)
-                    
-                    c.font = '50px impact'
-                    c.fillStyle = 'white'
-                    c.fillText('Score: ' + score, 530, 350 )
-
-
-
+                    gameOver();
 
                 } else if (bubbles.length === 0){
                     //change to level to game
@@ -173,6 +149,45 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
         })
+
+        if(timerX > 1000){
+            gameOver();
+        }
+            
+    }
+    
+    
+
+    function gameStart(){
+
+    
+        c.drawImage(background, 0, 0, canvas.width, canvas.height);
+    
+        // c.fillRect(600, 300, 150, 80)
+
+        c.font = '50px impact';
+        c.fillStyle = 'White';
+        c.fillText('Start Game', 610, 350)
+
+        canvas.addEventListener('click', handleClick)
+    
+    }
+
+    function handleClick(e) {
+        
+            const rect = e.getBoundingClientRect;
+            const x = e.clientX;
+            const y = e.clientY;
+            let distX = x - 600;
+            let distY = y - 300;
+            
+            const distance = Math.sqrt(distX + distY);
+
+            if (distance < 80){
+                animate();
+            }
+        
+        canvas.removeEventListener('click', handleClick)
     }
     
 
@@ -195,11 +210,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gameOver(){
-        if (lives.length === 0) return true
-        else return false
+        c.drawImage(background, 0, 0, canvas.width, canvas.height);
+        c.font = '100px impact';
+        c.fillStyle = 'white';
+
+        c.fillText('Game Over!', 395, canvas.height / 2)
+        c.fillStyle = 'red';
+        c.fillText('Game Over!', 400, canvas.height / 2)
+        
+        c.font = '50px impact'
+        c.fillStyle = 'white'
+        c.fillText('Score: ' + score, 530, 350 )
     }
    
-    animate();
 
 
     
