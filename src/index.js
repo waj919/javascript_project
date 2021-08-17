@@ -16,34 +16,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const border = new Image();
     background.src = "./src/images/wall2.jpg"
 
+    let endOfGame = false;
+    let timeOver = false;
 
     //player, bubbles, and ammo
     let player = new Player();
     let score = 0;
-    const lives = [1,2,3]
+    let lives = [1,2,3]
     // let lives = []
+    let reanimate = false;
+    
     
    
-    gameStart();
     
     
     let timerX = 300;
     let timerWidth = 700;
-
     
-    let bubbles = [new Bubbles(750, 100, 50, 1.5, 1.5)]
-//   , new Bubbles(550, 100, 50, -1.5, -1.5)
+    
+    let bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5)]
+    console.log(bubbles);
+    //   , new Bubbles(550, 100, 50, -1.5, -1.5)
     let magazine = [];
+    // let b1 = new Bubbles(450, 100, , 1.5, 1.5)
+
+
     window.addEventListener('keydown', (e) => {
         if (e.key === " "){
             magazine.push(new Ammo(player.x + 50, player.y))
         }
-    }   
-    );
-   
+    });
+    
+    gameStart();
   
     function animate() {
-
+        reanimate =  false;
         c.clearRect(0 , 0, canvas.width, canvas.height)
         // c.fillStyle = 'rgba(255, 255, 0, 0.1)';
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -68,12 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         c.fillText(`Score: ${score}`, 1035, 50);
 
 
-        // for (let i = 0; i < lives.length; i++) {
             c.font =  '30px OCR A Std, monospace';
             c.fillStyle = 'hsl(45, 95%, 58%)'
             c.fillText('Lives: ' + lives.length, 150 ,50)
-            // spacing += 20
-        // }
 
 
         //player movement
@@ -82,14 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //animates player
         player.handleSpriteFrame();
+        // b1.draw(c);
+        // b1.move();
 
         //bubble movement loop
         bubbles.forEach( (bubble, bubbleIndex) => {
-            
             bubble.draw(c);
             bubble.move();
             
-            //loop through array to get each amoo thats shot
+            //loop through array to get each ammo thats shot
             magazine.forEach( (ammo, ammoIndex) => {
                 //draw the ammo
                 ammo.draw(c);
@@ -105,18 +110,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     score += 100;
                     if(bubble.radius > 19){
 
-                        bubbles.push(new Bubbles(bubble.x , bubble.y - 60, (bubble.radius - 10), 1, 1));
-                        // bubbles.push(new Bubbles(num, 100, 30, 1, 1));
-
-                        // remove the bubble and ammo from arrays
                         magazine.splice(ammoIndex, 1);
                         bubbles.splice(bubbleIndex, 1);
+                        bubbles.push(new Bubbles(bubble.x +50 , bubble.y, (bubble.radius - 10), 1, 1));
+                        
+                        //works when i have this buttom code commented out
+                        bubbles.push(new Bubbles(bubble.x - 50, bubble.y , bubble.radius- 10, -1,-1));
+                        // debugger
+
+                        // remove the bubble and ammo from arrays
                         
                     }else {
                         bubbles.splice(bubbleIndex, 1);
                         
-                        levelTwo();
-                        requestAnimationFrame(animate);
+                        // levelTwo();
+                        reanimate = true;
+                        // requestAnimationFrame(animate);
                         
                     }
                 }
@@ -127,31 +136,36 @@ document.addEventListener('DOMContentLoaded', () => {
         bubbles.forEach(bubble => {    
             if (Collisions.checkPlayerCollision(bubble, player)){
                 c.drawImage(background, 0, 0, canvas.width, canvas.height);
-                // player.draw(c);
-                // bubble.draw(c);
                 lives.splice(lives.length-1 ,1)
 
-
                 if (lives.length === 0){
-
+                    endOfGame = true;
                     gameOver();
-
-                } else if (bubbles.length === 0){
-                    //change to level to game
-                    levelTwo();
                 } else {
                     resetGame();
-                    requestAnimationFrame(animate);
+                    reanimate = true;
+                    // requestAnimationFrame(animate);
                 } 
             }  else {
+                reanimate = true;
                 // have an if statement where if level1 is true, you go to a different fucntion
-                requestAnimationFrame(animate);
+                // requestAnimationFrame(animate);
             }
             
         })
-
+        
+        if (bubbles.length === 0){
+            //change to level to game
+            levelTwo();
+        }
         if(timerX > 1000){
+            timeOver = true;
             gameOver();
+        }
+
+        if (reanimate){
+            console.log(reanimate);
+            requestAnimationFrame(animate);
         }
             
     }
@@ -160,44 +174,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gameStart(){
 
-    
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
-    
-        // c.fillRect(600, 300, 150, 80)
+        let start = document.getElementById('start');
 
-        c.font = '50px impact';
-        c.fillStyle = 'White';
-        c.fillText('Start Game', 610, 350)
-
-        canvas.addEventListener('click', handleClick)
-    
+        start.style.display = 'block'
+        endOfGame = false;
+        
+        
+        start.addEventListener('click', handleClick)
+        
+        
     }
-
+    
     function handleClick(e) {
         
-            const rect = e.getBoundingClientRect;
-            const x = e.clientX;
-            const y = e.clientY;
-            let distX = x - 600;
-            let distY = y - 300;
-            
-            const distance = Math.sqrt(distX + distY);
-
-            if (distance < 80){
-                animate();
-            }
+        //hide the start button
+        start.style.display = 'none'
         
-        canvas.removeEventListener('click', handleClick)
+        start.removeEventListener('click', handleClick)
+        resetGame();
+        animate();
+        
     }
     
 
     function resetGame(){
-        player = new Player();
-        bubbles = [new Bubbles(650, 100, 50, 1.5, 1.5)]
-        magazine = [];
-        
-        timerX = 300;
-        timerWidth = 700;
+
+        let over = document.getElementById('game-over')
+        //check to see if it is end of game, where player has no more lives
+        if(endOfGame){;
+            over.style.display = 'none';                        //hide the restart button after click
+            over.removeEventListener('click', resetGame)
+            lives.push(1,2,3) 
+            endOfGame = false
+            resetGame()                                  //add new lives to game since it will be empty
+            gameStart();
+
+        } else if (timeOver) {
+            over.style.display = 'none'; 
+            timeOver = false;                       //hide the restart button after click
+
+            lives = [1,2,3]
+            resetGame();
+
+        }  else{     //else player lost one life, reset to original state
+     
+            player = new Player();
+            bubbles = [new Bubbles(650, 100, 30, 1.5, 1.5)]
+            magazine = [];
+            
+            timerX = 300;
+            timerWidth = 700;
+            
+        }
+       
+
         
     }
     
@@ -210,17 +241,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function gameOver(){
+        // set endOfGame variable to true;
+
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         c.font = '100px impact';
         c.fillStyle = 'white';
-
+        
         c.fillText('Game Over!', 395, canvas.height / 2)
         c.fillStyle = 'red';
         c.fillText('Game Over!', 400, canvas.height / 2)
         
         c.font = '50px impact'
         c.fillStyle = 'white'
-        c.fillText('Score: ' + score, 530, 350 )
+        c.fillText('Score: ' + score, 540, 350 )
+
+        //find restart button and add a listener to it
+        let over = document.getElementById('game-over')
+        over.style.display = 'block'
+        over.addEventListener('click', resetGame)
     }
    
 

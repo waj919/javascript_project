@@ -1,9 +1,10 @@
 #canvas {
-   
+    background: url(../images/wall2.jpg);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: -3px 2px 9px 6px black;
 }
 
 body {
@@ -11,5 +12,50 @@ body {
     background-color: #6dd5ed;
 }
 
+
+#start {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color:rgba(112, 111, 118, 0.99);
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Games', sans-serif;
+    font-size: 40px;
+    border-radius: 20px;
+}
+
+
+#game-over {
+    display: none;  
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color:rgba(112, 111, 118, 0.99);
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Games', sans-serif;
+    font-size: 40px;
+    border-radius: 20px;
+
+}
+
+
+#game-name {
+    display: flex;
+    justify-content: center;
+    color: black;
+    text-shadow: 4px 4px blue;
+    font-size: 100px;
+    font-family: 'Games', sans-serif;
+}
 
 

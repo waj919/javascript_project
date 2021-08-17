@@ -56,6 +56,7 @@ export default class Player {
     }
 
     draw(c){
+        
         c.drawImage(
             this.sprite, 
             this.width * this.frameX,
