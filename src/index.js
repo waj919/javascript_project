@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById('reset-button')
     
     resetButton.addEventListener('click', () => {
+        lives = [1,2,3]
         resetGame();
     })
     
