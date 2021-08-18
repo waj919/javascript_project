@@ -68,6 +68,7 @@ export default class Player {
             100, 
             100
         );      
+       
     }
 
 }

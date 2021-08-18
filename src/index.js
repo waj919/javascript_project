@@ -31,11 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     let timerX = 300;
+    let timerXVel = .3;
+    let timerWidthVel = .3;
     let timerWidth = 700;
     
     
     let bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5)]
-    console.log(bubbles);
     //   , new Bubbles(550, 100, 50, -1.5, -1.5)
     let magazine = [];
     // let b1 = new Bubbles(450, 100, , 1.5, 1.5)
@@ -59,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if ( timerX < 1000){
             c.fillStyle = 'red'
             c.fillRect(timerX, 30, timerWidth, 30)
-            timerX += .3;
-            timerWidth -= .3;
+            timerX += timerXVel;
+            timerWidth -= timerWidthVel;
         }
 
        
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 //draw the ammo
                 ammo.draw(c);
                 ammo.update();
-
+                
                 //check if its reached the top of the canvas and remove it if it has
                 if (ammo.y < 0){
                     magazine.splice(ammoIndex, 1)
@@ -109,15 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (Collisions.ammoCollision(ammo, bubble)){
                     score += 100;
                     if(bubble.radius > 19){
-
-                        magazine.splice(ammoIndex, 1);
-                        bubbles.splice(bubbleIndex, 1);
-                        bubbles.push(new Bubbles(bubble.x +50 , bubble.y, (bubble.radius - 10), 1, 1));
                         
-                        //works when i have this buttom code commented out
-                        bubbles.push(new Bubbles(bubble.x - 50, bubble.y , bubble.radius- 10, -1,-1));
+                        bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), -1,-.8));
+                        bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 1, .8));
                         // debugger
-
+                        
+                        bubbles.splice(bubbleIndex, 1);
+                        magazine.splice(ammoIndex, 1);
                         // remove the bubble and ammo from arrays
                         
                     }else {
@@ -128,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // requestAnimationFrame(animate);
                         
                     }
+                    
                 }
             })
         })  // end bubble loop
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (lives.length === 0){
                     endOfGame = true;
-                    gameOver();
+                    // gameOver();
                 } else {
                     resetGame();
                     reanimate = true;
@@ -156,16 +156,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (bubbles.length === 0){
             //change to level to game
+            ///reset timer
+            timerX = 300;
+            timerWidth = 700;
+            timerWidthVel = .2;
+            timerXVel = .2;
+            //add new bubbles and reset game state
             levelTwo();
-        }
-        if(timerX > 1000){
+            requestAnimationFrame(animate);
+
+        } else if(timerX > 1000){
+            //checks to see if time is over
             timeOver = true;
             gameOver();
-        }
-
-        if (reanimate){
-            console.log(reanimate);
-            requestAnimationFrame(animate);
+        }else if (endOfGame){
+            //calls game over if endOfGame is true
+            gameOver();
+        } else if (reanimate){
+           requestAnimationFrame(animate);
         }
             
     }
@@ -205,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(endOfGame){;
             over.style.display = 'none';                        //hide the restart button after click
             over.removeEventListener('click', resetGame)
+            score = 0;
             lives.push(1,2,3) 
             endOfGame = false
             resetGame()                                  //add new lives to game since it will be empty
@@ -213,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (timeOver) {
             over.style.display = 'none'; 
             timeOver = false;                       //hide the restart button after click
-
+            score = 0;
             lives = [1,2,3]
             resetGame();
 
@@ -233,15 +242,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function levelTwo(){
-        // bubbles = [new Bubbles(750, 100, 50, 1.5, 1.5), new Bubbles(550, 100, 50, -1.5, -1.5)]
-        console.log(bubbles)
+        bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5), new Bubbles(550, 100, 30, -1.5, -1.5)]
+        // console.log(bubbles)
         magazine = [];
         player = new Player();
         // 
     }
 
     function gameOver(){
-        // set endOfGame variable to true;
+        // set endOfGame variable to true;  
+        // debugger     
 
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         c.font = '100px impact';
@@ -254,6 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
         c.font = '50px impact'
         c.fillStyle = 'white'
         c.fillText('Score: ' + score, 540, 350 )
+
+        score = 0 ;
 
         //find restart button and add a listener to it
         let over = document.getElementById('game-over')

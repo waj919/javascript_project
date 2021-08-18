@@ -2,6 +2,7 @@ export default class Ammo {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.vel = 4
 
     }
 
@@ -15,6 +16,6 @@ export default class Ammo {
     }
 
     update(){
-        this.y -= 3;
+        this.y -= this.vel;
     }
 }

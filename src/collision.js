@@ -1,7 +1,34 @@
 export const checkPlayerCollision = function(bubble, player){
+
+    // let testX = bubble.x + 10;
+    // let testY = bubble.y + ;
+
+    // if (bubble.x < player.x) {
+    //     testX = player.x;
+    // } else if(bubble.x > player.x + player.width) {
+    //     testX =  player.x + player.width;
+    // }
+    // if (bubble.y < player.y ){
+    //     testY = player.y;
+    // } else if (bubble.y > player.y + player.height) {
+    //     testY = player.y + player.height;
+    // }
+    
+    // let distX = bubble.x - testX;
+
+    // let distY = bubble.y - testY;
+
+    // let distance = Math.sqrt((distX * distX) + (distY * distY))
+
+    // if (distance <= bubble.radius){
+    //     return true
+    // }
+    
+    // return false
+    
         
-    let endX = player.x + player.width;
-    let endY = player.y + player.height;
+    let endX = player.x + 15 + player.width + 30;
+    let endY = player.y + player.height + 40;
     
     let centerX = (player.x + endX) / 2;
     let centerY = (player.y +endY) / 2;

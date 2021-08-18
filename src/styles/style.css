@@ -5,6 +5,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: -3px 2px 9px 6px black;
+
+    border-radius: 10px;
 }
 
 body {
@@ -27,10 +29,13 @@ body {
     font-family: 'Games', sans-serif;
     font-size: 40px;
     border-radius: 20px;
+    border: 5px solid black;
 }
 
 
 #game-over {
+    border: 5px solid black;
+
     display: none;  
     top: 60%;
     left: 50%;
