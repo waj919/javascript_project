@@ -1,7 +1,7 @@
 #canvas {
     background: url(../images/wall2.jpg);
     position: absolute;
-    top: 50%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: -3px 2px 9px 6px black;
@@ -12,11 +12,12 @@
 body {
     background: url(../images/background.jpg);
     background-color: #6dd5ed;
+                                                
 }
 
 
 #start {
-    top: 50%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
@@ -26,7 +27,8 @@ body {
     padding-bottom: 20px;
     padding-left: 30px;
     padding-right: 30px;
-    font-family: 'Games', sans-serif;
+    /* font-family: 'Games', sans-serif; */
+    font-family: myFont ;
     font-size: 40px;
     border-radius: 20px;
     border: 5px solid black;
@@ -37,7 +39,7 @@ body {
     border: 5px solid black;
 
     display: none;  
-    top: 60%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
@@ -47,7 +49,8 @@ body {
     padding-bottom: 10px;
     padding-left: 30px;
     padding-right: 30px;
-    font-family: 'Games', sans-serif;
+    /* font-family: 'Games', sans-serif; */
+    font-family: myFont;
     font-size: 40px;
     border-radius: 20px;
 
@@ -59,8 +62,113 @@ body {
     justify-content: center;
     color: black;
     text-shadow: 4px 4px blue;
-    font-size: 100px;
-    font-family: 'Games', sans-serif;
+    font-size: 80px;
+    font-family: myFont;
+}
+
+nav {
+    display: flex;                                                                       
+    justify-content: center;
+}
+
+ul {
+    list-style: none;  
+}
+
+@font-face {
+    font-family: myFont;
+    src: url(PressStart2P-Regular.ttf);
+}
+
+a {
+    color: inherit;
+}
+
+i {
+    color: gray;
+}
+
+
+.popup {
+    position: fixed;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+}
+
+.popup.active {
+    transform: translate(-50%, -50%) scale(1);
+
+}
+#popup-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+
+}
+
+#popup-header #title {
+    font-family: myFont;    
+    font-size: 1.25rem;
+    font-weight: bold;
+
+}
+
+#popup-header #close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.50rem;
+    font-weight: 900;
+    font-family: myFont;    
+
+
+}
+
+#popup-body {
+    padding: 10px 15px;
+    font-family: myFont;
+
+}
+
+#how-to-button, #reset-button{
+    display: flex;
+    position: absolute;
+    width: 130px;
+    height: 60px;
+    top: 20%;
+    left: 30%;
+    padding-top: 7px;
+    font-weight: bold;
+    font-size: 19px;
+    font-family: myFont;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    border-radius: 7px;
+    box-shadow: 0 .2em gray;
+    cursor: pointer;
+
+}
+
+#reset-button {
+    left: 60%;
+    text-align: center;
+    padding-top: 14px;
+    padding-left: 25px;
+    font-family: 'ArcadeClassic', sans-serif;
+    font-size: 30px;
+
 }
 
 

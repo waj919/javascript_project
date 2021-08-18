@@ -1,32 +1,5 @@
 export const checkPlayerCollision = function(bubble, player){
-
-    // let testX = bubble.x + 10;
-    // let testY = bubble.y + ;
-
-    // if (bubble.x < player.x) {
-    //     testX = player.x;
-    // } else if(bubble.x > player.x + player.width) {
-    //     testX =  player.x + player.width;
-    // }
-    // if (bubble.y < player.y ){
-    //     testY = player.y;
-    // } else if (bubble.y > player.y + player.height) {
-    //     testY = player.y + player.height;
-    // }
     
-    // let distX = bubble.x - testX;
-
-    // let distY = bubble.y - testY;
-
-    // let distance = Math.sqrt((distX * distX) + (distY * distY))
-
-    // if (distance <= bubble.radius){
-    //     return true
-    // }
-    
-    // return false
-    
-        
     let endX = player.x + 15 + player.width + 30;
     let endY = player.y + player.height + 40;
     
@@ -55,6 +28,20 @@ export const ammoCollision = function (ammo, bubble){
     
 }
 
+
+export const drawInfo = function(score, lives, c){
+    c.font = '30px OCR A Std, monospace';
+    c.fillStyle = 'black'
+    c.fillText(`Score: ${score}`, 1030, 50);
+
+    c.fillStyle = 'white'
+    c.fillText(`Score: ${score}`, 1035, 50);
+
+
+    c.font =  '30px OCR A Std, monospace';
+    c.fillStyle = 'hsl(45, 95%, 58%)'
+    c.fillText('Lives: ' + lives.length, 150 ,50)
+}
 
 
 

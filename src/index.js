@@ -1,6 +1,6 @@
 import Bubbles from "./bubbles";
 import Player from "./player";
-import * as Collisions from "./collision";
+import * as Utils from "./utils";
 import Ammo from "./ammo";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,10 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // let lives = []
     let reanimate = false;
     
-    
+    //level counter to see what level you are on
+    let levelCounter = 0;
    
     
-    
+    //timer details
     let timerX = 300;
     let timerXVel = .3;
     let timerWidthVel = .3;
@@ -37,9 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     let bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5)]
-    //   , new Bubbles(550, 100, 50, -1.5, -1.5)
     let magazine = [];
-    // let b1 = new Bubbles(450, 100, , 1.5, 1.5)
+
+    // how-to button
+    const howToButton = document.getElementById('how-to-button')
+    const popup = document.getElementsByClassName('popup')
+    const close = document.getElementById('close-button')
+    const resetButton = document.getElementById('reset-button')
+    
+    resetButton.addEventListener('click', () => {
+        resetGame();
+    })
+    
+    howToButton.addEventListener('click', () => {
+        popup[0].classList.add('active')
+    })
+
+    close.addEventListener( 'click', () => {
+        popup[0].classList.remove('active'); 
+    })
 
 
     window.addEventListener('keydown', (e) => {
@@ -50,10 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     gameStart();
   
+
+    //animate function
     function animate() {
         reanimate =  false;
         c.clearRect(0 , 0, canvas.width, canvas.height)
-        // c.fillStyle = 'rgba(255, 255, 0, 0.1)';
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
      
         //timer for the game
@@ -68,17 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         
         // making score appear
-        c.font = '30px OCR A Std, monospace';
-        c.fillStyle = 'black'
-        c.fillText(`Score: ${score}`, 1030, 50);
-
-        c.fillStyle = 'white'
-        c.fillText(`Score: ${score}`, 1035, 50);
-
-
-            c.font =  '30px OCR A Std, monospace';
-            c.fillStyle = 'hsl(45, 95%, 58%)'
-            c.fillText('Lives: ' + lives.length, 150 ,50)
+        Utils.drawInfo(score, lives, c);
 
 
         //player movement
@@ -107,21 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 //check to see if the ammo hit a bubble 
-                if (Collisions.ammoCollision(ammo, bubble)){
+                if (Utils.ammoCollision(ammo, bubble)){
                     score += 100;
                     if(bubble.radius > 19){
                         
                         bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), -1,-.8));
                         bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 1, .8));
-                        // debugger
                         
+                        // remove the bubble and ammo from arrays
                         bubbles.splice(bubbleIndex, 1);
                         magazine.splice(ammoIndex, 1);
-                        // remove the bubble and ammo from arrays
                         
                     }else {
                         bubbles.splice(bubbleIndex, 1);
-                        
                         // levelTwo();
                         reanimate = true;
                         // requestAnimationFrame(animate);
@@ -134,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         //collison detection
         bubbles.forEach(bubble => {    
-            if (Collisions.checkPlayerCollision(bubble, player)){
+            if (Utils.checkPlayerCollision(bubble, player)){
                 c.drawImage(background, 0, 0, canvas.width, canvas.height);
                 lives.splice(lives.length-1 ,1)
 
@@ -148,8 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 } 
             }  else {
                 reanimate = true;
-                // have an if statement where if level1 is true, you go to a different fucntion
-                // requestAnimationFrame(animate);
             }
             
         })
@@ -161,9 +165,19 @@ document.addEventListener('DOMContentLoaded', () => {
             timerWidth = 700;
             timerWidthVel = .2;
             timerXVel = .2;
+
+            levelCounter++;
+            if (levelCounter === 1) {
             //add new bubbles and reset game state
-            levelTwo();
-            requestAnimationFrame(animate);
+                reanimate = levelTwo();;
+                requestAnimationFrame(animate)
+                
+            } else if(levelCounter === 2) {
+                
+                reanimate = levelThree();
+                requestAnimationFrame(animate)
+                
+            }
 
         } else if(timerX > 1000){
             //checks to see if time is over
@@ -176,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
            requestAnimationFrame(animate);
         }
             
-    }
+    } //end of animate loop
     
     
 
@@ -192,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         start.addEventListener('click', handleClick)
         
         
-    }
+    } //end of gamestart fucntion
     
     function handleClick(e) {
         
@@ -200,59 +214,63 @@ document.addEventListener('DOMContentLoaded', () => {
         start.style.display = 'none'
         
         start.removeEventListener('click', handleClick)
-        resetGame();
+        // resetGame();
         animate();
         
-    }
+    }//end of handelclick fucntion
     
 
+    //reset game state depending on whether player lost a life or lost all lives
     function resetGame(){
 
         let over = document.getElementById('game-over')
+
+
         //check to see if it is end of game, where player has no more lives
+        
         if(endOfGame){;
-            over.style.display = 'none';                        //hide the restart button after click
+
+            //hide the restart button after click
+            over.style.display = 'none';                        
             over.removeEventListener('click', resetGame)
             score = 0;
+
+            //add new lives to game since it will be empty
             lives.push(1,2,3) 
             endOfGame = false
-            resetGame()                                  //add new lives to game since it will be empty
+            resetGame()                                  
             gameStart();
 
         } else if (timeOver) {
             over.style.display = 'none'; 
-            timeOver = false;                       //hide the restart button after click
+            timeOver = false;                       
             score = 0;
-            lives = [1,2,3]
+            lives = []
+            endOfGame = true;
             resetGame();
 
         }  else{     //else player lost one life, reset to original state
-     
-            player = new Player();
-            bubbles = [new Bubbles(650, 100, 30, 1.5, 1.5)]
-            magazine = [];
-            
+            if (levelCounter === 0){
+                score = 0
+                player = new Player();
+                bubbles = [new Bubbles(650, 100, 30, 1.5, 1.5)]
+                magazine = [];
+            } else if (levelCounter === 1){
+                levelTwo(); 
+            } else if(levelCounter === 2){
+                levelThree();
+            }
+                
             timerX = 300;
             timerWidth = 700;
             
         }
-       
-
-        
-    }
     
-    function levelTwo(){
-        bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5), new Bubbles(550, 100, 30, -1.5, -1.5)]
-        // console.log(bubbles)
-        magazine = [];
-        player = new Player();
-        // 
-    }
-
+    } //end of resetGame fucntion
+    
+    //draws gameover screen as well as the restart button for the game
     function gameOver(){
-        // set endOfGame variable to true;  
-        // debugger     
-
+           
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         c.font = '100px impact';
         c.fillStyle = 'white';
@@ -263,18 +281,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
         c.font = '50px impact'
         c.fillStyle = 'white'
-        c.fillText('Score: ' + score, 540, 350 )
-
-        score = 0 ;
-
+        c.fillText('Score: ' + score, 530, 350 )
+        
+        levelCounter = 0;
+        
         //find restart button and add a listener to it
         let over = document.getElementById('game-over')
         over.style.display = 'block'
         over.addEventListener('click', resetGame)
+    
+    }//end of gameOver fucntion
+    
+
+    //initiate gamestate for level 2
+    function levelTwo(){
+        c.drawImage(background, 0, 0, canvas.width, canvas.height);
+        Utils.drawInfo(score, lives, c);
+        bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5), new Bubbles(550, 100, 30, -1.5, -1.5)]
+        // console.log(bubbles)
+        magazine = [];
+        player = new Player();
+        player.draw(c);
+        bubbles.forEach(bubble => {
+            bubble.draw(c)
+        })
+        // setTimeout(animate, 3000)
+        return true;
+    
+    } //end of levelTwo fucntion 
+    
+    function levelThree(){
+        c.drawImage(background, 0, 0, canvas.width, canvas.height);
+        Utils.drawInfo(score, lives, c);
+        bubbles = [new Bubbles(200, 100, 40, 1.5, 1.5), new Bubbles(600, 100, 50, -1.5, -1.5), new Bubbles(1000, 100, 40, -1.5, -1.5)]
+        // console.log(bubbles)
+        magazine = [];
+        player = new Player();
+        player.draw(c);
+        bubbles.forEach(bubble => {
+            bubble.draw(c)
+        })
+        // setTimeout(animate, 3000)
+        return true;
+    
     }
-   
-
-
     
 })
 

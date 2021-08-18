@@ -1,7 +1,5 @@
-
 export default class Bubbles {
     constructor(x, y , radius, velX, velY){
-        // debugger
         this.x = x;
         this.y = y;
         this.radius = radius;

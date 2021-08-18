@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./dist/main.css" />
     <link rel="stylesheet" href="./src/styles/style.css" type="text/css">
     <link href="http://fonts.cdnfonts.com/css/games" rel="stylesheet">
+    <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f71299424d.js" crossorigin="anonymous"></script>
     <script src="./dist/main.js"></script>
     <title>Project Name</title>
 </head>
@@ -15,15 +17,35 @@
     <nav>
         <ul>
             <li>
-                <a>
-                    <i class="fab fa-github-square"></i>
+                <a href="https://github.com/waj919">
+                    <i class="fab fa-github fa-5x"></i>
                 </a>
             </li>
 
         </ul>
 
     </nav>
-    <div id="game-name">Bubble Trouble</div>
+    <div id="game-name">BubbleTrouble</div>
+
+    <button id="how-to-button">How To Play</button>
+    <button id="reset-button">Reset</button>
+    <div class="popup">
+        <div id="popup-header">
+            <div id="title">How To Play</div>
+            <div id="close-button">&times;</div>
+        </div>
+        <div id="popup-body">
+            <ol>
+                <li>Use the left and right arrow keys to move your character</li>
+                <li>Press space to shoot your weapon at the bubbles!</li>
+                <li>Destory all the bubbles before the timer runs out!</li>
+                <li>Bubbles split when hit, and will continue splitting until they are to small </li>
+                <li>Avoid the bubbles, you will lose a life when you collide with a bubble </li>
+            </ol>
+
+        </div>
+        <div id="overlay"></div>
+    </div>
     
     <div id="container">
         <canvas id="canvas"></canvas>
@@ -31,4 +53,5 @@
     <button id="start">Start Game</button>
     <button id="game-over">Restart</button>
 </body>
+
 </html>
