@@ -1,7 +1,7 @@
 #canvas {
     background: url(../images/wall2.jpg);
     position: absolute;
-    top: 57%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: -3px 2px 9px 6px black;
@@ -146,7 +146,7 @@ i {
     position: absolute;
     width: 130px;
     height: 60px;
-    top: 20%;
+    top: 22%;
     left: 30%;
     padding-top: 7px;
     font-weight: bold;
