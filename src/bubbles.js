@@ -32,7 +32,6 @@ export default class Bubbles {
         this.y += this.velY;
         this.x += this.velX;
 
-    
     }
 
 
