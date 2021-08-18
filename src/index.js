@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         c.font = '50px impact'
         c.fillStyle = 'white'
-        c.fillText('Score: ' + score, 530, 350 )
+        c.fillText('Score: ' + score, 545, 350 )
         
         levelCounter = 0;
         
