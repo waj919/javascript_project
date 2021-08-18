@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     resetButton.addEventListener('click', () => {
         lives = [1,2,3]
+        levelCounter = 0;
         resetGame();
     })
     
