@@ -24,7 +24,7 @@ export default class Bubbles {
         if (this.x - this.radius < 0|| this.x + this.radius > 1250 ){
             this.velX *= -1;
         } 
-        if (this.y  < 0 || this.y + this.radius >= 600){
+        if (this.y  < 0 || this.y + this.radius > 600){
             this.velY *= -1; 
         }
         
