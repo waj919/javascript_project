@@ -32,8 +32,7 @@ export default class Bubbles {
           if (this.y + this.radius >= canvas.height) {
             this.velY = -this.velY * this.damping;
             this.y = canvas.height - this.radius;
-            // traction here
-            // this.velX *= this.traction;
+
           } else if (this.y - this.radius <= 0) {
             this.velY = -this.velY * this.damping;
             this.y = this.radius;
