@@ -28,10 +28,12 @@ export default class Bubbles {
             this.velY *= -1; 
         }
         
-        this.velY += .1;
         this.y += this.velY;
+        this.velY += .1;    
         this.x += this.velX;
 
+        
+        console.log('x: ', this.x, 'y:', this.y, 'velX:', this.velX, 'velY :', this.velY)
     }
 
 
