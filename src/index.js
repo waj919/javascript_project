@@ -166,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (levelCounter === 1) {
             //add new bubbles and reset game state
                 levelTwo();
+                //add a timeout so level doesnt start immediately
                 setTimeout(() => {requestAnimationFrame(animate) }, 2000)
                 
             } else if(levelCounter === 2) {
