@@ -41,12 +41,15 @@ export default class Bubbles {
             this.velY = -this.velY * this.damping;
             this.y = this.radius;
           }
+
+          
         
           this.velY += this.gravity; 
         
           this.x += this.velX;
           this.y += this.velY;
-        
+
+
     }
 
 

@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerWidthVel = .3;
     
     
-    let bubbles = [new Bubbles(750, 200, 30, 2.5, 2)]
+    let bubbles = [new Bubbles(750, 200, 30, 2.5, 1)]
     let magazine = [];
 
     // how-to button
@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     score += 100;
                     if(bubble.radius > 19){
                         
-                        bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), -2.5, 2));
-                        bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 2.5, 2));
+                        bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), -2.5, 1));
+                        bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 2.5, 1));
                         
                         // remove the bubble and ammo from arrays
                         bubbles.splice(bubbleIndex, 1);
@@ -175,10 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             }
 
-        } else if(timerX > 1000){
-            //checks to see if time is over
-            timeOver = true;
-            gameOver();
+        // } else if(timerX > 1000){
+        //     //checks to see if time is over
+        //     timeOver = true;
+        //     gameOver();
         }else if (endOfGame){
             //calls game over if endOfGame is true
             gameOver();
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (levelCounter === 0){
                 score = 0
                 player = new Player();
-                bubbles = [new Bubbles(650, 200, 30, 2.5, 2)]
+                bubbles = [new Bubbles(650, 200, 30, 2.5, 1)]
                 magazine = [];
             } else if (levelCounter === 1){
                 levelTwo(); 
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function levelTwo(){
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         Utils.drawInfo(score, lives, c);
-        bubbles = [new Bubbles(750, 200, 30,2.5, 2), new Bubbles(500, 200, 30, -2.5, 2)]
+        bubbles = [new Bubbles(750, 200, 30, 2.5, 1), new Bubbles(500, 200, 30, -2.5, 1)]
         // console.log(bubbles)
         magazine = [];
         player = new Player();
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function levelThree(){
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         Utils.drawInfo(score, lives, c);
-        bubbles = [new Bubbles(200, 200, 40, 2.5, 2), new Bubbles(600, 200, 50, -2.5, 2), new Bubbles(1000, 200, 40, -2.5, 2)]
+        bubbles = [new Bubbles(200, 200, 40, 2.5, 1), new Bubbles(600, 200, 50, -2.5, 1), new Bubbles(1000, 200, 40, -2.5, 1)]
         // console.log(bubbles) 
         magazine = [];
         player = new Player();
