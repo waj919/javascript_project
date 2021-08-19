@@ -42,7 +42,7 @@ export default class Bubbles {
             this.y = this.radius;
           }
         
-          this.velY += this.gravity; // <--- this is it
+          this.velY += this.gravity; 
         
           this.x += this.velX;
           this.y += this.velY;
