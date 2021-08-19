@@ -1,4 +1,4 @@
-![wireframe](https://user-images.githubusercontent.com/85583728/130076572-cc424bae-6401-490b-add4-407697e7b052.png)
+
 # Bubble Trouble
 
 ## Background 
