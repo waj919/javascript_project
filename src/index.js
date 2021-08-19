@@ -179,10 +179,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             }
 
-        // } else if(timerX > 1000){
-        //     //checks to see if time is over
-        //     timeOver = true;
-        //     gameOver();
+        } else if(timerX > 1000){
+            //checks to see if time is over
+            timeOver = true;
+            gameOver();
         }else if (endOfGame){
             //calls game over if endOfGame is true
             gameOver();
