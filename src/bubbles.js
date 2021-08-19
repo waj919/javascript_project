@@ -3,8 +3,12 @@ export default class Bubbles {
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.velY = velX;
-        this.velX = velY;
+        this.velY = velY;
+        this.velX = velX;
+        this.damping = .98;
+        this.gravity = 0.07;
+        // this.traction = 0.8;
+
         
 
     }
@@ -20,20 +24,29 @@ export default class Bubbles {
     }
 
     move(){
+    
+        if (this.x + this.radius >= 1250) {
+            this.velX = -this.velX * this.damping;
+            this.x = 1250 - this.radius;
+          } else if (this.x - this.radius <= 0) {
+            this.velX = -this.velX * this.damping;
+            this.x = this.radius;
+          }
+          if (this.y + this.radius >= canvas.height) {
+            this.velY = -this.velY * this.damping;
+            this.y = canvas.height - this.radius;
+            // traction here
+            // this.velX *= this.traction;
+          } else if (this.y - this.radius <= 0) {
+            this.velY = -this.velY * this.damping;
+            this.y = this.radius;
+          }
         
-        if (this.x - this.radius < 0|| this.x + this.radius > 1250 ){
-            this.velX *= -1;
-        } 
-        if (this.y  < 0 || this.y + this.radius > 600){
-            this.velY *= -1; 
-        }
+          this.velY += this.gravity; // <--- this is it
         
-        this.y += this.velY;
-        this.velY += .1;    
-        this.x += this.velX;
-
+          this.x += this.velX;
+          this.y += this.velY;
         
-        console.log('x: ', this.x, 'y:', this.y, 'velX:', this.velX, 'velY :', this.velY)
     }
 
 

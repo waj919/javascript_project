@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerWidthVel = .3;
     
     
-    let bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5)]
+    let bubbles = [new Bubbles(750, 200, 30, 2.5, 2)]
     let magazine = [];
 
     // how-to button
@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     score += 100;
                     if(bubble.radius > 19){
                         
-                        bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), 1, -.8));
-                        bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 1, .8));
+                        bubbles.push(new Bubbles((bubble.x - 50), (bubble.y - 40 ),( bubble.radius- 10), -2.5, 2));
+                        bubbles.push(new Bubbles((bubble.x + 50) , (bubble.y - 40), (bubble.radius - 10), 2.5, 2));
                         
                         // remove the bubble and ammo from arrays
                         bubbles.splice(bubbleIndex, 1);
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (levelCounter === 0){
                 score = 0
                 player = new Player();
-                bubbles = [new Bubbles(650, 100, 30, 1.5, 1.5)]
+                bubbles = [new Bubbles(650, 200, 30, 2.5, 2)]
                 magazine = [];
             } else if (levelCounter === 1){
                 levelTwo(); 
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function levelTwo(){
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         Utils.drawInfo(score, lives, c);
-        bubbles = [new Bubbles(750, 100, 30, 1.5, 1.5), new Bubbles(500, 100, 30, 1.5, -1.5)]
+        bubbles = [new Bubbles(750, 200, 30,2.5, 2), new Bubbles(500, 200, 30, -2.5, 2)]
         // console.log(bubbles)
         magazine = [];
         player = new Player();
@@ -307,8 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function levelThree(){
         c.drawImage(background, 0, 0, canvas.width, canvas.height);
         Utils.drawInfo(score, lives, c);
-        bubbles = [new Bubbles(200, 100, 40, 1.5, 1.5), new Bubbles(600, 100, 50, 1.5, -1.5), new Bubbles(1000, 100, 40, 1.5, -1.5)]
-        // console.log(bubbles)
+        bubbles = [new Bubbles(200, 200, 40, 2.5, 2), new Bubbles(600, 200, 50, -2.5, 2), new Bubbles(1000, 200, 40, -2.5, 2)]
+        // console.log(bubbles) 
         magazine = [];
         player = new Player();
         player.draw(c);
