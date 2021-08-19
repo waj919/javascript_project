@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //timer details
     let timerX = 300;
     let timerWidth = 700;
-    let timerXVel = .3;
-    let timerWidthVel = .3;
+    let timerXVel = .2;
+    let timerWidthVel = .2;
     
     
     let bubbles = [new Bubbles(750, 200, 30, 2.5, 1)]
@@ -159,8 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ///reset timer
             timerX = 300;
             timerWidth = 700;
-            timerWidthVel = .2;
-            timerXVel = .2;
+            timerWidthVel = .1;
+            timerXVel = .1;
 
             levelCounter++;
             if (levelCounter === 1) {
@@ -169,6 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(animate)
                 
             } else if(levelCounter === 2) {
+                timerX = 300;
+                timerWidth = 700;
+                timerWidthVel = .05;
+                timerXVel = .05;
                 
                 reanimate = levelThree();
                 requestAnimationFrame(animate)
