@@ -7,10 +7,7 @@ export default class Bubbles {
         this.velX = velX;
         this.damping = .98;
         this.gravity = 0.07;
-        // this.traction = 0.8;
-
-        
-
+    
     }
 
     draw(c){

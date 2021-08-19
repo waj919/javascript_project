@@ -165,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             levelCounter++;
             if (levelCounter === 1) {
             //add new bubbles and reset game state
-                reanimate = levelTwo();;
-                requestAnimationFrame(animate)
+                levelTwo();;
+                setTimeout(() => {requestAnimationFrame(animate) }, 2000)
                 
             } else if(levelCounter === 2) {
                 timerX = 300;
@@ -174,8 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 timerWidthVel = .05;
                 timerXVel = .05;
                 
-                reanimate = levelThree();
-                requestAnimationFrame(animate)
+                levelThree();
+                setTimeout(() => {requestAnimationFrame(animate) }, 2000)
                 
             }
 
