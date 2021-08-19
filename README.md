@@ -1,3 +1,4 @@
+
 # Bubble Trouble
 
 ## Background 
@@ -24,8 +25,10 @@ In addition, this project will include:
 
 
 ## Wireframe
- 
-![image](https://user-images.githubusercontent.com/85583728/129275210-1ceaa42e-96f7-459a-ba19-480a57e02f0d.png)
+
+
+![wireframe](https://user-images.githubusercontent.com/85583728/130076590-7ebe5c14-37e4-4d23-a3ff-71392dc8c24d.png)
+
 
 
 ## Techonologies, Libraries, APIs
