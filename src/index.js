@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             levelCounter++;
             if (levelCounter === 1) {
             //add new bubbles and reset game state
-                levelTwo();;
+                levelTwo();
                 setTimeout(() => {requestAnimationFrame(animate) }, 2000)
                 
             } else if(levelCounter === 2) {
@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         start.removeEventListener('click', handleClick)
         animate();
+        
         
     }//end of handelclick fucntion
     
@@ -304,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bubbles.forEach(bubble => {
             bubble.draw(c)
         })
-        return true;
+    
     
     } //end of levelTwo fucntion 
     
@@ -319,8 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bubbles.forEach(bubble => {
             bubble.draw(c)
         })
-        return true;
-    
+      
     }
     
 })
