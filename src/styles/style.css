@@ -74,6 +74,8 @@ nav {
 
 ul {
     list-style: none;  
+    display: flex;
+    gap: 80px;
 }
 
 @font-face {
@@ -86,7 +88,8 @@ a {
 }
 
 i {
-    color: gray;
+    color: lightgrey;
+    font-size: 87px
 }
 
 
@@ -106,8 +109,8 @@ i {
 
 .popup.active {
     transform: translate(-50%, -50%) scale(1);
-
 }
+
 #popup-header {
     padding: 10px 15px;
     display: flex;
