@@ -5,6 +5,8 @@
 **Bubble Trouble is an exciting game. The main goal of the game is to get rid of all bubbles on the screen. The way you do that is with your character. You move around with your left and right arrow keys and then press space to shoot at the bubbles on the screen. 
  When shot, the bubbles will break into two smaller bubbles and will continue to do this until they are to small to break any further. You will have 5 lives and everytime you get hit by a bubble, you lose one and the game resets!**
  
+ Live Link: [Bubble Trouble](https://waj919.github.io/javascript_project/)
+ 
  
  ## Functionality & MVPs
  In Bubble Trouble, users will be able to: 
